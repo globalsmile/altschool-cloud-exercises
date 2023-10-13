@@ -1,0 +1,99 @@
+Vagrant.configure("2") do |config|
+  # Master node
+  config.vm.define "master" do |master|
+    master.vm.box = "ubuntu/trusty64"
+    master.vm.hostname = "master"
+
+    master.vm.network "private_network", ip: "192.168.35.105"
+
+    master.vm.provider "virtualbox" do |vb|
+      vb.memory = "512"
+    end
+
+    master.vm.provision "shell", inline: <<-SHELL
+      # Update packages and install necessary software
+      sudo apt-get update
+      sudo apt-get install -y vim
+
+      sudo mkdir -p /mnt/altschool
+      sudo chown -R altschool:altschool /mnt/altschool
+
+      echo "Master Node Configuration Completed."
+    SHELL
+
+    master.vm.provision "shell", inline: "echo 'altschool' | sudo tee -a /etc/default/useradd"
+
+  end
+
+  # Slave node
+  config.vm.define "slave" do |slave|
+    slave.vm.box = "ubuntu/trusty64"
+    slave.vm.hostname = "slave"
+
+    slave.vm.network "private_network", ip: "192.168.35.106"
+
+    slave.vm.provider "virtualbox" do |vb|
+      vb.memory = "256"
+    end
+
+    slave.vm.provision "shell", inline: <<-SHELL
+      # Update packages and install necessary software
+      sudo apt-get update
+      sudo apt-get install -y vim
+
+      sudo mkdir -p /mnt/altschool/slave
+      sudo chown -R altschool:altschool /mnt/altschool/slave
+      
+      echo "Slave Node Configuration Completed."
+    SHELL
+
+    slave.vm.provision "shell", inline: "echo 'altschool' | sudo tee -a /etc/default/useradd"
+
+  end
+
+  # Load Balancer node
+  config.vm.define "load_balancer" do |lb|
+    lb.vm.box = "ubuntu/trusty64"
+    lb.vm.hostname = "load_balancer"
+
+    lb.vm.network "private_network", ip: "192.168.35.107"
+
+    lb.vm.provider "virtualbox" do |vb|
+      vb.memory = "512"
+    end
+
+    lb.vm.provision "shell", inline: <<-SHELL
+      # Update packages and install necessary software
+      sudo apt-get update
+      sudo apt-get install -y nginx
+      echo "Load Balancer Node Configuration Completed."
+
+
+      # Configure Nginx as a simple load balancer
+      sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
+      server {
+          listen 80;
+          server_name _;
+
+          location / {
+              proxy_pass http://backend;
+              proxy_set_header Host \$host;
+              proxy_set_header X-Real-IP \$remote_addr;
+              proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto \$scheme;
+          }
+
+          upstream backend {
+              server 192.168.35.105;
+              server 192.168.35.106;
+          }
+      }
+      EOF
+
+      sudo systemctl restart nginx
+    SHELL
+
+    lb.vm.provision "shell", inline: "echo 'altschool' | sudo tee -a /etc/default/useradd"
+  end
+end
+
