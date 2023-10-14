@@ -24,17 +24,17 @@ fi
 # Function to execute commands on the Master node via SSH
 ssh_master()
 {
-	ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null altschool@192.168.35.105 "$1"
+	ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vagrant@192.168.35.105 "$1"
 }
 # Function to ssh into the Slave node from the Master node
 ssh_slave()
 {
-	ssh_master "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null altschool@192.168.35.106 \"$1\""
+	ssh_master "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vagrant@192.168.35.106 \"$1\""
 }
 
 # Deploy Master, Slave and Load Balancer nodes
 
-sudo -u altschool vagrant up
+vagrant up
 
 # Create user altschool on the Master node
 ssh_master "sudo adduser altschool --gecos '' --disabled-password"
@@ -47,7 +47,7 @@ ssh_slave "mkdir -p /home/altschool/.ssh"
 ssh_master "cat ~/.ssh/id_rsa.pub" | ssh_slave "cat >> /home/altschool/.ssh/authorized_keys"
 
 # Copy contents of /mnt/altschool directory to Slave node
-ssh_master "rsync -avz /mnt/altschool/ altschool@192.168.35.106:/mnt/altschool/slave/"
+ssh_master "rsync -avz /mnt/altschool/ vagrant@192.168.35.106:/mnt/altschool/slave/"
 
 # Display overview of Linux process management on Master node
 ssh_master "ps aux"
@@ -85,7 +85,7 @@ EOF"
 
 # Validate PHP functionality with Apache
 echo "<?php phpinfo(); ?>" > index.php
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null index.php altschool@192.168.35.105:/var/www/html/
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null index.php altschool@192.168.35.106:/var/www/html/
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null index.php vagrant@192.168.35.105:/var/www/html/
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null index.php vagrant@192.168.35.106:/var/www/html/
 
 success "Deployment completed successfully."
