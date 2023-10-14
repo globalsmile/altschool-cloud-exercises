@@ -24,17 +24,21 @@ fi
 # Function to execute commands on the Master node via SSH
 ssh_master()
 {
-	ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null altschool@192.168.35.105 "$1"
+	ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vagrant@192.168.35.105 "$1"
 }
 # Function to ssh into the Slave node from the Master node
 ssh_slave()
 {
-	ssh_master "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null altschool@192.168.35.106 \"$1\""
+	ssh_master "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vagrant@192.168.35.106 \"$1\""
 }
 
 # Deploy Master and Slave nodes
+# ssh_master "su - altschool; vagrant up"
 vagrant up master
+vagrant ssh master
 vagrant up slave
+vagrant ssh slave
+# ssh_slave "su - altschool; vagrant up"
 
 # Create user altschool on the Master node
 ssh_master "sudo adduser altschool --gecos '' --disabled-password"
@@ -42,6 +46,7 @@ ssh_master "sudo usermod -aG sudo altschool"
 ssh_master "echo 'altschool:password' | sudo chpasswd"
 
 # Enable SSH key-based authentication
+ssh_master "ssh-keygen -t rsa -b 2048"
 ssh_slave "mkdir -p /home/altschool/.ssh"
 ssh_master "cat ~/.ssh/id_rsa.pub" | ssh_slave "cat >> /home/altschool/.ssh/authorized_keys"
 
@@ -84,7 +89,7 @@ EOF"
 
 # Validate PHP functionality with Apache
 echo "<?php phpinfo(); ?>" > index.php
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null index.php altschool@192.168.35.105:/var/www/html/
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null index.php altschool@192.168.35.106:/var/www/html/
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null index.php vagrant@192.168.35.105:/var/www/html/
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null index.php vagrant@192.168.35.106:/var/www/html/
 
 success "Deployment completed successfully."

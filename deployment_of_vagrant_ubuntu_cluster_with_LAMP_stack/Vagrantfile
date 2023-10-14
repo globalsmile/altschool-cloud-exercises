@@ -21,8 +21,6 @@ Vagrant.configure("2") do |config|
       echo "Master Node Configuration Completed."
     SHELL
 
-    master.vm.provision "shell", inline: "echo 'altschool' | sudo tee -a /etc/default/useradd"
-
   end
 
   # Slave node
@@ -47,14 +45,12 @@ Vagrant.configure("2") do |config|
       echo "Slave Node Configuration Completed."
     SHELL
 
-    slave.vm.provision "shell", inline: "echo 'altschool' | sudo tee -a /etc/default/useradd"
-
   end
 
   # Load Balancer node
   config.vm.define "load_balancer" do |lb|
     lb.vm.box = "ubuntu/trusty64"
-    lb.vm.hostname = "load_balancer"
+    lb.vm.hostname = "load-balancer"
 
     lb.vm.network "private_network", ip: "192.168.35.107"
 
@@ -93,7 +89,6 @@ Vagrant.configure("2") do |config|
       sudo systemctl restart nginx
     SHELL
 
-    lb.vm.provision "shell", inline: "echo 'altschool' | sudo tee -a /etc/default/useradd"
   end
 end
 
