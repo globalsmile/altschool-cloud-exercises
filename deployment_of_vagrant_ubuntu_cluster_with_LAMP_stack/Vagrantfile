@@ -20,6 +20,7 @@ Vagrant.configure("2") do |config|
 
       echo "Master Node Configuration Completed."
     SHELL
+    master.vm.provision "shell", inline: "echo 'altschool' | sudo tee -a /etc/default/useradd"
 
   end
 
@@ -44,6 +45,7 @@ Vagrant.configure("2") do |config|
       
       echo "Slave Node Configuration Completed."
     SHELL
+    slave.vm.provision "shell", inline: "echo 'altschool' | sudo tee -a /etc/default/useradd"
 
   end
 
@@ -88,6 +90,8 @@ Vagrant.configure("2") do |config|
 
       sudo systemctl restart nginx
     SHELL
+    lb.vm.provision "shell", inline: "echo 'altschool' | sudo tee -a /etc/default/useradd"
+
 
   end
 end
