@@ -34,7 +34,7 @@ ssh_slave()
 
 # Deploy Master, Slave and Load Balancer nodes
 
-vagrant up
+sudo -u altschool vagrant up
 
 # Create user altschool on the Master node
 ssh_master "sudo adduser altschool --gecos '' --disabled-password"
