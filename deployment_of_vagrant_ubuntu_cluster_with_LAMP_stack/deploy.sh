@@ -33,9 +33,12 @@ ssh_slave()
 }
 
 # Deploy Master and Slave nodes
-ssh_master "su - altschool; vagrant up"
-
-ssh_slave "su - altschool; vagrant up"
+# ssh_master "su - altschool; vagrant up"
+vagrant up master
+vagrant ssh master
+vagrant up slave
+vagrant ssh slave
+# ssh_slave "su - altschool; vagrant up"
 
 # Create user altschool on the Master node
 ssh_master "sudo adduser altschool --gecos '' --disabled-password"
@@ -43,6 +46,7 @@ ssh_master "sudo usermod -aG sudo altschool"
 ssh_master "echo 'altschool:password' | sudo chpasswd"
 
 # Enable SSH key-based authentication
+ssh_master "ssh-keygen -t rsa -b 2048"
 ssh_slave "mkdir -p /home/altschool/.ssh"
 ssh_master "cat ~/.ssh/id_rsa.pub" | ssh_slave "cat >> /home/altschool/.ssh/authorized_keys"
 
