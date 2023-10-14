@@ -32,20 +32,9 @@ ssh_slave()
 	ssh_master "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null altschool@192.168.35.106 \"$1\""
 }
 
-# Deploy Master and Slave nodes
+# Deploy Master, Slave and Load Balancer nodes
 
-#ssh_master "su - altschool; vagrant up"
-
-#vagrant up master
-#vagrant ssh master
-#vagrant up slave
-#vagrant ssh slave
-#ssh_slave "su - altschool; vagrant up"
-#ssh_master "su - altschool; vagrant up master; vagrant ssh master"
-#vagrant up slave
-#vagrant ssh slave
-#ssh_slave "su - altschool; vagrant up slave; vagrant ssh slave"
-vagrant up
+sudo -u altschool vagrant up
 
 # Create user altschool on the Master node
 ssh_master "sudo adduser altschool --gecos '' --disabled-password"
