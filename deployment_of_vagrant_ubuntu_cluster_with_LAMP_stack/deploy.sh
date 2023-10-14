@@ -33,12 +33,19 @@ ssh_slave()
 }
 
 # Deploy Master and Slave nodes
+<<<<<<< HEAD
 # ssh_master "su - altschool; vagrant up"
 vagrant up master
 vagrant ssh master
 vagrant up slave
 vagrant ssh slave
 # ssh_slave "su - altschool; vagrant up"
+=======
+ssh_master "su - altschool; vagrant up master; vagrant ssh master"
+#vagrant up slave
+#vagrant ssh slave
+ssh_slave "su - altschool; vagrant up slave; vagrant ssh slave"
+>>>>>>> afe91e7ae4d21384e4add62c1081611a0fdc462c
 
 # Create user altschool on the Master node
 ssh_master "sudo adduser altschool --gecos '' --disabled-password"
