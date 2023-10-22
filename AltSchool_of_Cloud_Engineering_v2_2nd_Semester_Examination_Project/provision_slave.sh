@@ -9,9 +9,6 @@ wget https://raw.githubusercontent.com/globalsmile/altschool-cloud-exercises/mas
 chmod +x provision_master.sh
 ./provision_master.sh
 
-# Verify PHP application accessibility
-# (add necessary commands and take screenshots)
-
 # Create cron job for checking uptime at 12 am
 (crontab -l ; echo "0 0 * * * /usr/bin/uptime >> /var/log/uptime.log") | crontab -
 
