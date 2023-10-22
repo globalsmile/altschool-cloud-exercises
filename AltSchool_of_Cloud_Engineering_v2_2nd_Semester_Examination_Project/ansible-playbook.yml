@@ -1,0 +1,9 @@
+---
+- name: Execute Provisioning Script on Slave Node
+  hosts: slave
+  become: true
+
+  tasks:
+    - name: Execute Provisioning Script
+      shell: "bash /vagrant/provision_slave.sh"
+
