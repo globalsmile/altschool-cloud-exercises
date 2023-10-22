@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# SSH into master node
-vagrant up master
-vagrant ssh master
-
 # Update and upgrade
 sudo apt-get update
 sudo apt-get upgrade -y
