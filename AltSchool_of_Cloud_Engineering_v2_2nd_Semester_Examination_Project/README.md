@@ -53,6 +53,10 @@ The bash script `provision_slave.sh` executes the master provisioning script on 
 - Verifies the accessibility of the PHP application.
 - Creates a cron job to check the server's uptime every day at midnight.
 
+![IMG_0181](https://github.com/globalsmile/altschool-cloud-exercises/assets/106287208/e6c7e84c-0ea3-40dc-a35e-dce80994f94b)
+
+![IMG_0182](https://github.com/globalsmile/altschool-cloud-exercises/assets/106287208/d42d333b-813d-45dd-bc4a-2f00d613a555)
+
 ### Ansible Playbook
 The Ansible playbook `ansible_playbook.yml` is used to execute the master provisioning script on the Slave node:
 
@@ -61,4 +65,12 @@ The Ansible playbook `ansible_playbook.yml` is used to execute the master provis
 ## Verification
 
 After provisioning the Slave node, the PHP application's accessibility is verified by making an HTTP request to the application's URL. The verification process is automated in the `provision_slave.sh` script.
+
+![IMG_0183](https://github.com/globalsmile/altschool-cloud-exercises/assets/106287208/6119d1b0-0be9-4482-9469-bac76404f4e6)
+
+![IMG_0184](https://github.com/globalsmile/altschool-cloud-exercises/assets/106287208/887963c9-a61e-4fa9-82bb-bbbb4481c943)
+
+
+
+
 
