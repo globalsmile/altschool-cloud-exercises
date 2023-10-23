@@ -29,4 +29,36 @@ This repository contains scripts and configurations to automate the provisioning
    cd AltSchool_of_Cloud_Engineering_v2_2nd_Semester_Examination_Project
 
 
+3. Start Vagrant
+```
+vagrant up
+```
+
+## Provisioning Scripts
+
+### Master Node
+
+The bash script `provision_master.sh` is responsible for setting up the LAMP stack on the Master node. It performs the following tasks:
+
+- Updates and upgrades the system.
+- Installs Apache, MySQL, PHP, and other necessary packages.
+- Clones a PHP application from the Laravel GitHub repository.
+- Configures Apache for the Laravel application.
+- Configures MySQL for the Laravel application.
+
+### Slave Node
+
+The bash script `provision_slave.sh` executes the master provisioning script on the Slave node and performs additional tasks:
+
+- Verifies the accessibility of the PHP application.
+- Creates a cron job to check the server's uptime every day at midnight.
+
+### Ansible Playbook
+The Ansible playbook `ansible_playbook.yml` is used to execute the master provisioning script on the Slave node:
+
+```ansible-playbook ansible_playbook.yml```
+
+## Verification
+
+After provisioning the Slave node, the PHP application's accessibility is verified by making an HTTP request to the application's URL. The verification process is automated in the `provision_slave.sh` script.
 
