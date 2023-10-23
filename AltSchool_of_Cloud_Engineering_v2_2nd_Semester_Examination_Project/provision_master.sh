@@ -27,8 +27,8 @@ y
 y
 y
 EOF
-mysql -u root -e "CREATE DATABASE laravel;"
-mysql -u root -e "CREATE USER 'laravel'@'localhost' IDENTIFIED BY 'sample_password';"
-mysql -u root -e "GRANT ALL PRIVILEGES ON laravel.* TO 'laravel'@'localhost';"
-mysql -u root -e "FLUSH PRIVILEGES;"
-mysql -u root -e "EXIT;"
+sudo mysql -u root -e "CREATE DATABASE laravel;"
+sudo mysql -u root -e "CREATE USER 'laravel'@'localhost' IDENTIFIED BY 'sample_password';"
+sudo mysql -u root -e "GRANT ALL PRIVILEGES ON laravel.* TO 'laravel'@'localhost';"
+sudo mysql -u root -e "FLUSH PRIVILEGES;"
+sudo mysql -u root -e "EXIT;"
