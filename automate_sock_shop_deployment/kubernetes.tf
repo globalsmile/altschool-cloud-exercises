@@ -1,20 +1,20 @@
 # kubernetes.tf
 
 provider "aws" {
-  region = "us-west-2" # Your region
+  region = var.region
 }
 
 resource "aws_eks_cluster" "kube" {
-  name     = "kubernetes-cluster"
-  role_arn = aws_iam_role.example.arn
+  name     = var.cluster_name
+  role_arn = aws_iam_role.kube.arn
 
   vpc_config {
-    subnet_ids = ["subnet-12345678", "subnet-87654321"] # Your subnets
+    subnet_ids = var.subnet_ids
   }
 }
 
 resource "aws_iam_role" "kube" {
-  name = "kube-role"
+  name = var.role_name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
