@@ -1,0 +1,48 @@
+* [33mffc4802[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m add: required files
+[31m|[m * [33mdfecd66[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Update README.md
+[31m|[m[31m/[m  
+* [33m720052d[m add: architecture diagram
+* [33m20fdfd8[m add: microservices-demo directory
+* [33m0af6ce3[m add: required files
+* [33m676d9cd[m add: Jenkinsfile.groovy file
+* [33mc982e1d[m add:configuration files
+* [33m117c9a9[m add: README.md file
+* [33m45ade07[m initial commit
+* [33m62f49bb[m update: README.md file
+* [33m16c6756[m add: README.md file
+* [33mfcbdbd2[m Update README.md
+* [33mcd2d29b[m update: provision_master.sh file
+* [33m11bfb45[m add: README.md
+* [33m2aed4da[m update: README.md file
+* [33mc4097bc[m modified: provision_slave.sh file
+* [33mbf20a5e[m add: playbook and provision_slave.sh files
+* [33m32becf1[m modified: provision_master.sh file
+* [33m8a1491d[m add: provision_master.sh file
+* [33m6cc00c7[m remove: .deploy.sh.swp file
+* [33md3caba4[m update: README.md file
+* [33m648e017[m add: EOF
+* [33m213ea85[m edit: Vagrantfile
+* [33m118bdad[m remove user: altschool
+* [33m50343dc[m delete user: altschool
+* [33mbeaed73[m add: netmask
+* [33m8b90faf[m delete user
+* [33m0c817cf[m add: libvirt
+* [33m3ae2a1a[m edit config file 2
+* [33md66b379[m edit config file
+* [33m60a6926[m edit: deploy.sh file to match user altschool
+* [33maa8b414[m edit: deploy.sh file to match user altschool
+* [33m3f6baa0[m edit: deploy.sh - add full path to Vagrantfile
+* [33m776f2b8[m edit: deploy.sh file to match user altschool
+* [33m44efce9[m modified: deploy.sh - vagrant
+*   [33mc58135d[m modified conflicted files
+[33m|[m[34m\[m  
+[33m|[m * [33mafe91e7[m restated files
+[33m|[m * [33mf96476a[m Revert to the state before commit_hash
+* [34m|[m [33mb81a29f[m modified: Vagrantfile and deploy.sh file to use the default "vagrant"
+* [34m|[m [33mc7304b0[m modified: deploy.sh file
+* [34m|[m [33m477b80d[m modified: deploy.sh file
+* [34m|[m [33m90311c2[m add: modified: deploy.sh file
+* [34m|[m [33mc295eac[m add: modified: Vagrantfile
+[34m|[m[34m/[m  
+* [33m08883e8[m modified: Vagrantfile
+* [33mfb473a9[m add: required files
