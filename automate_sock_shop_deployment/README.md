@@ -54,7 +54,8 @@ server {
 - Apache: Alternative web server to Nginx, also used for enabling HTTPS access.
 
 # Architecture Diagram
-![](https://imgbox.com/m5IRSK7l)
+
+![simple web stack](https://github.com/globalsmile/altschool-cloud-exercises/assets/106287208/cf9db630-6b9a-498e-b67c-79fbff68d12f)
 
 # Conclusion
 This documentation provides a comprehensive overview of the deployment process, configurations, and tools used for setting up the application securely. By following these steps, you can ensure secure communication between clients and the server.
